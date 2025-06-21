@@ -1,0 +1,40 @@
+# src/main/resources/application.yml
+spring:
+  application:
+    name: bookhub-bookstore
+
+  # 数据源配置
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  # JPA配置
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # H2控制台
+  h2:
+    console:
+      enabled: true
+
+  # Thymeleaf配置
+  thymeleaf:
+    cache: false
+
+# 服务器配置
+server:
+  port: 8080
+
+# 日志配置
+logging:
+  level:
+    com.bookhub: DEBUG
+    org.springframework.security: DEBUG
