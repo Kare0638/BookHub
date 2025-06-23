@@ -25,12 +25,30 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
-                        // Allow all requests for now (we'll add authentication later)
+                        // H2 Database Console
                         .requestMatchers("/h2-console/**").permitAll()
+
+                        // API Endpoints
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+
+                        // Frontend Pages (Thymeleaf templates)
+                        .requestMatchers("/", "/home", "/index").permitAll()
+                        .requestMatchers("/books", "/books/**").permitAll()
+                        .requestMatchers("/login", "/register").permitAll()
+                        .requestMatchers("/about", "/contact", "/privacy").permitAll()
+
+                        // Static Resources (CSS, JS, Images)
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/static/**", "/webjars/**").permitAll()
+                        .requestMatchers("/favicon.ico").permitAll()
+
+                        // Bootstrap and FontAwesome CDN (if needed)
+                        .requestMatchers("https://cdn.jsdelivr.net/**").permitAll()
+                        .requestMatchers("https://cdnjs.cloudflare.com/**").permitAll()
+
                         // For now, allow all other requests (we'll secure them later)
                         .anyRequest().permitAll()
                 )

@@ -1,0 +1,380 @@
+<!-- src/main/resources/templates/register.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - BookHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .register-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem 0;
+        }
+        .register-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .register-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .btn-register {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+        }
+        .btn-register:hover {
+            background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+        }
+        .password-strength {
+            height: 5px;
+            border-radius: 3px;
+            margin-top: 5px;
+            transition: all 0.3s;
+        }
+        .is-valid {
+            border-color: #198754;
+        }
+        .is-invalid {
+            border-color: #dc3545;
+        }
+        .valid-feedback {
+            color: #198754;
+        }
+        .invalid-feedback {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+<div class="register-container d-flex align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="register-card">
+                    <!-- Header -->
+                    <div class="register-header">
+                        <h2 class="mb-0">
+                            <i class="fas fa-book"></i> Join BookHub
+                        </h2>
+                        <p class="mb-0 mt-2">Create your account and start exploring amazing books</p>
+                    </div>
+
+                    <!-- Register Form -->
+                    <div class="p-4">
+                        <!-- Alert Messages -->
+                        <div id="registerAlert" class="alert alert-danger d-none" role="alert">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span id="registerErrorMessage">Registration failed</span>
+                        </div>
+
+                        <div id="registerSuccess" class="alert alert-success d-none" role="alert">
+                            <i class="fas fa-check-circle"></i>
+                            Registration successful! Please log in to continue.
+                        </div>
+
+                        <form id="registerForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName" class="form-label">
+                                        <i class="fas fa-user"></i> First Name
+                                    </label>
+                                    <input type="text" class="form-control" id="firstName"
+                                           name="firstName" required
+                                           placeholder="Enter your first name">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName" class="form-label">
+                                        <i class="fas fa-user"></i> Last Name
+                                    </label>
+                                    <input type="text" class="form-control" id="lastName"
+                                           name="lastName" required
+                                           placeholder="Enter your last name">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="username" class="form-label">
+                                    <i class="fas fa-at"></i> Username
+                                </label>
+                                <input type="text" class="form-control" id="username"
+                                       name="username" required
+                                       placeholder="Choose a username"
+                                       minlength="3" maxlength="20">
+                                <div class="invalid-feedback"></div>
+                                <div class="valid-feedback">Username is available!</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">
+                                    <i class="fas fa-envelope"></i> Email Address
+                                </label>
+                                <input type="email" class="form-control" id="email"
+                                       name="email" required
+                                       placeholder="Enter your email address">
+                                <div class="invalid-feedback"></div>
+                                <div class="valid-feedback">Email is available!</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">
+                                    <i class="fas fa-lock"></i> Password
+                                </label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password"
+                                           name="password" required
+                                           placeholder="Create a strong password"
+                                           minlength="6">
+                                    <button class="btn btn-outline-secondary" type="button"
+                                            id="togglePassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="password-strength bg-light" id="passwordStrength"></div>
+                                <div class="invalid-feedback"></div>
+                                <small class="text-muted">Password must be at least 6 characters long</small>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="confirmPassword" class="form-label">
+                                    <i class="fas fa-lock"></i> Confirm Password
+                                </label>
+                                <input type="password" class="form-control" id="confirmPassword"
+                                       name="confirmPassword" required
+                                       placeholder="Confirm your password">
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                                <label class="form-check-label" for="agreeTerms">
+                                    I agree to the <a href="#" class="text-decoration-none">Terms of Service</a>
+                                    and <a href="#" class="text-decoration-none">Privacy Policy</a>
+                                </label>
+                                <div class="invalid-feedback">You must agree to the terms and conditions</div>
+                            </div>
+
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="newsletter">
+                                <label class="form-check-label" for="newsletter">
+                                    Subscribe to our newsletter for book recommendations and updates
+                                </label>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-register">
+                                    <span class="spinner-border spinner-border-sm d-none" id="registerSpinner"></span>
+                                    <i class="fas fa-user-plus" id="registerIcon"></i>
+                                    <span id="registerText">Create Account</span>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Links -->
+                        <div class="text-center mt-4">
+                            <p class="mb-0">
+                                Already have an account?
+                                <a href="/login" class="text-decoration-none fw-bold">Sign in here</a>
+                            </p>
+                        </div>
+
+                        <!-- Back to Home -->
+                        <div class="text-center mt-3 pt-3 border-top">
+                            <a href="/" class="btn btn-link text-decoration-none">
+                                <i class="fas fa-arrow-left"></i> Back to BookHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Toggle password visibility
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordField = document.getElementById('password');
+        const toggleIcon = this.querySelector('i');
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+        } else {
+            passwordField.type = 'password';
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+        }
+    });
+
+    // Password strength checker
+    document.getElementById('password').addEventListener('input', function() {
+        const password = this.value;
+        const strengthBar = document.getElementById('passwordStrength');
+        let strength = 0;
+
+        if (password.length >= 6) strength += 1;
+        if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength += 1;
+        if (password.match(/[0-9]/)) strength += 1;
+        if (password.match(/[^a-zA-Z0-9]/)) strength += 1;
+
+        const colors = ['#dc3545', '#fd7e14', '#ffc107', '#28a745'];
+        const widths = ['25%', '50%', '75%', '100%'];
+
+        if (password.length > 0) {
+            strengthBar.style.backgroundColor = colors[strength - 1] || colors[0];
+            strengthBar.style.width = widths[strength - 1] || widths[0];
+        } else {
+            strengthBar.style.width = '0%';
+        }
+    });
+
+    // Confirm password validation
+    document.getElementById('confirmPassword').addEventListener('input', function() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = this.value;
+
+        if (confirmPassword && password !== confirmPassword) {
+            this.classList.add('is-invalid');
+            this.classList.remove('is-valid');
+            this.nextElementSibling.textContent = 'Passwords do not match';
+        } else if (confirmPassword) {
+            this.classList.add('is-valid');
+            this.classList.remove('is-invalid');
+        }
+    });
+
+    // Username availability check
+    let usernameTimeout;
+    document.getElementById('username').addEventListener('input', function() {
+        const username = this.value;
+        clearTimeout(usernameTimeout);
+
+        if (username.length >= 3) {
+            usernameTimeout = setTimeout(async () => {
+                try {
+                    const response = await fetch(`/api/users/check-username?username=${username}`);
+                    const available = await response.json();
+
+                    if (available) {
+                        this.classList.add('is-valid');
+                        this.classList.remove('is-invalid');
+                    } else {
+                        this.classList.add('is-invalid');
+                        this.classList.remove('is-valid');
+                        this.nextElementSibling.textContent = 'Username is already taken';
+                    }
+                } catch (error) {
+                    console.error('Error checking username:', error);
+                }
+            }, 500);
+        }
+    });
+
+    // Email availability check
+    let emailTimeout;
+    document.getElementById('email').addEventListener('input', function() {
+        const email = this.value;
+        clearTimeout(emailTimeout);
+
+        if (email.includes('@')) {
+            emailTimeout = setTimeout(async () => {
+                try {
+                    const response = await fetch(`/api/users/check-email?email=${email}`);
+                    const available = await response.json();
+
+                    if (available) {
+                        this.classList.add('is-valid');
+                        this.classList.remove('is-invalid');
+                    } else {
+                        this.classList.add('is-invalid');
+                        this.classList.remove('is-valid');
+                        this.nextElementSibling.textContent = 'Email is already registered';
+                    }
+                } catch (error) {
+                    console.error('Error checking email:', error);
+                }
+            }, 500);
+        }
+    });
+
+    // Handle registration form submission
+    document.getElementById('registerForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const spinner = document.getElementById('registerSpinner');
+        const icon = document.getElementById('registerIcon');
+        const text = document.getElementById('registerText');
+        const alertDiv = document.getElementById('registerAlert');
+        const successDiv = document.getElementById('registerSuccess');
+
+        // Show loading state
+        spinner.classList.remove('d-none');
+        icon.classList.add('d-none');
+        text.textContent = 'Creating account...';
+        submitBtn.disabled = true;
+        alertDiv.classList.add('d-none');
+        successDiv.classList.add('d-none');
+
+        try {
+            const formData = new FormData(this);
+            const response = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: formData.get('username'),
+                    email: formData.get('email'),
+                    password: formData.get('password'),
+                    firstName: formData.get('firstName'),
+                    lastName: formData.get('lastName')
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Success
+                successDiv.classList.remove('d-none');
+                this.reset();
+                setTimeout(() => {
+                    window.location.href = '/login';
+                }, 2000);
+            } else {
+                // Error
+                document.getElementById('registerErrorMessage').textContent = data.error || 'Registration failed';
+                alertDiv.classList.remove('d-none');
+            }
+        } catch (error) {
+            document.getElementById('registerErrorMessage').textContent = 'Network error. Please try again.';
+            alertDiv.classList.remove('d-none');
+        } finally {
+            // Reset button state
+            spinner.classList.add('d-none');
+            icon.classList.remove('d-none');
+            text.textContent = 'Create Account';
+            submitBtn.disabled = false;
+        }
+    });
+</script>
+</body>
+</html>
