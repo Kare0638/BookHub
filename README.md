@@ -1,306 +1,444 @@
-📚 BookHub Online Bookstore
+# 📚 BookHub Online Bookstore
+
 <div align="center">
-Show Image
-A modern, full-stack online bookstore built with Spring Boot
-Show Image
-Show Image
-Show Image
-Show Image
-Show Image
-🌟 Live Demo • 📖 Documentation • 🚀 Quick Start • 💬 Contact
+
+<img src="https://img.shields.io/badge/BookHub-Online%20Bookstore-2196F3?style=for-the-badge&logo=book-open&logoColor=white" alt="BookHub">
+
+### 🛍️ A modern, full-stack online bookstore built with Spring Boot
+
+<br>
+
+[![Java](https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.1.0-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Spring Security](https://img.shields.io/badge/Spring_Security-6.x-6DB33F?style=for-the-badge&logo=spring-security&logoColor=white)](https://spring.io/projects/spring-security)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+
+<br>
+
+**[🌟 Live Demo](http://your-deployed-url.com)** • **[📚 API Docs](#-api-documentation)** • **[🚀 Quick Start](#-quick-start)** • **[💬 Contact](#-contact)**
+
+<br>
+
+---
+
 </div>
 
-🎯 Project Overview
-BookHub is a comprehensive online bookstore application that demonstrates modern web development practices with Spring Boot. The project showcases a complete e-commerce solution with user management, book catalog, search functionality, and responsive design.
-✨ What Makes This Project Special
+## 🎯 About This Project
 
-🏗️ Enterprise Architecture: Clean separation of concerns with Controller-Service-Repository pattern
-🔐 Security First: Complete authentication system with Spring Security integration
-📱 Responsive Design: Mobile-friendly interface built with Bootstrap 5
-🔍 Smart Search: Advanced search and filtering capabilities
-⚡ Performance Optimized: Efficient database queries with pagination
-🧪 Well Tested: Comprehensive API testing with real-world scenarios
+BookHub is a **comprehensive online bookstore application** that demonstrates modern Java web development practices. Built with **Spring Boot** and featuring a complete e-commerce workflow, this project showcases enterprise-level architecture, security implementation, and user experience design.
 
+> 💡 **Perfect for demonstrating**: Full-stack development skills, Spring framework mastery, database design, and modern web practices
 
-🚀 Features
-🛍️ Customer Features
+<br>
 
-User Registration & Authentication: Secure account creation with real-time validation
-Book Browsing: Paginated book catalog with category filtering
-Advanced Search: Search by title, author, or keywords with instant results
-Book Details: Comprehensive book information with related recommendations
-Responsive Design: Seamless experience across all devices
+## ✨ Key Features
 
-👨‍💼 Admin Features
+<table>
+<tr>
+<td width="50%">
 
-User Management: Complete user administration and role management
-Book Management: Full CRUD operations for book inventory
-Category Management: Organize books with dynamic categories
-Dashboard Analytics: Sales and user statistics (planned)
+### 🛍️ **Customer Experience**
+- 🔐 **Secure Registration & Login**
+- 📚 **Interactive Book Catalog**
+- 🔍 **Smart Search & Filtering**
+- 📱 **Responsive Design**
+- 📖 **Detailed Book Information**
 
-🔧 Technical Features
+</td>
+<td width="50%">
 
-RESTful API: Complete REST API for all operations
-Data Validation: Server-side and client-side validation
-Error Handling: Comprehensive error handling and user feedback
-Security: Password encryption and role-based access control
+### 👨‍💼 **Admin Management**
+- 👥 **User Management Dashboard**
+- 📚 **Book Inventory Control**
+- 🏷️ **Category Management**
+- 📊 **System Analytics**
+- 🔧 **Role-Based Access Control**
 
+</td>
+</tr>
+</table>
 
-🛠️ Technology Stack
-Backend
-Show Image
-Show Image
-Show Image
-Show Image
-Show Image
-Database
-Show Image
-Show Image
-Frontend
-Show Image
-Show Image
-Show Image
-Show Image
+<br>
 
-📁 Project Structure
-bookhub-online-bookstore/
-├── 📁 src/main/java/com/bookhub/
-│   ├── 📁 config/          # Security & App Configuration
-│   ├── 📁 controller/      # REST & Web Controllers
-│   ├── 📁 service/         # Business Logic Layer
-│   ├── 📁 repository/      # Data Access Layer
-│   ├── 📁 entity/          # JPA Entities
-│   └── 📄 BookstoreApplication.java
-├── 📁 src/main/resources/
-│   ├── 📁 templates/       # Thymeleaf Templates
-│   ├── 📁 static/          # CSS, JS, Images
-│   └── 📄 application.yml  # Configuration
-├── 📁 src/test/           # Unit & Integration Tests
-├── 📄 pom.xml             # Maven Dependencies
-└── 📄 README.md
+## 🛠️ Technology Stack
 
-🚀 Quick Start
-Prerequisites
+<div align="center">
 
-☕ Java 17+ installed
-📦 Maven 3.6+ installed
-🗄️ MySQL 8.0+ (optional, H2 included for development)
-🔧 Git for version control
+### **Backend**
+![Java](https://img.shields.io/badge/Java_17-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=spring-boot&logoColor=white)
+![Spring Security](https://img.shields.io/badge/Spring_Security-6DB33F?style=flat-square&logo=spring-security&logoColor=white)
+![Spring Data JPA](https://img.shields.io/badge/Spring_Data_JPA-6DB33F?style=flat-square&logo=spring&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-C71A36?style=flat-square&logo=apache-maven&logoColor=white)
 
-🔧 Installation & Setup
+### **Database**
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
+![H2](https://img.shields.io/badge/H2_Database-1021FF?style=flat-square&logo=database&logoColor=white)
 
-Clone the repository
-bashgit clone https://github.com/your-username/BookHub.git
-cd BookHub
+### **Frontend**
+![Thymeleaf](https://img.shields.io/badge/Thymeleaf-005F0F?style=flat-square&logo=thymeleaf&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap_5-7952B3?style=flat-square&logo=bootstrap&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
 
-Build the project
-bashmvn clean install
+</div>
 
-Run the application
-bashmvn spring-boot:run
+<br>
 
-Access the application
+## 🏗️ Architecture Overview
 
-🌐 Main Application: http://localhost:8080
-🗄️ H2 Database Console: http://localhost:8080/h2-console
-📚 API Documentation: http://localhost:8080/api/
+```mermaid
+graph TB
+    A[👤 User Interface] --> B[🎮 Controller Layer]
+    B --> C[⚙️ Service Layer]
+    C --> D[💾 Repository Layer]
+    D --> E[🗄️ Database]
+    
+    B --> F[🔐 Spring Security]
+    C --> G[✅ Validation]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style E fill:#fce4ec
+```
 
+<br>
 
+## 🚀 Quick Start
 
-🔑 Default User Accounts
-RoleUsernamePasswordPurposeAdminadminadmin123Full system accessUserjohndoepassword123Regular customerUserjanesmithpassword123Regular customer
+### 📋 Prerequisites
 
-📊 Database Schema
+```bash
+☕ Java 17 or higher
+📦 Maven 3.6+
+🗄️ MySQL 8.0+ (optional - H2 included)
+🔧 Git
+```
+
+### ⚡ Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/BookHub.git
+   cd BookHub
+   ```
+
+2. **Build the project**
+   ```bash
+   mvn clean install
+   ```
+
+3. **Run the application**
+   ```bash
+   mvn spring-boot:run
+   ```
+
+4. **Access the application**
+   
+   🌐 **Application**: http://localhost:8080
+   
+   🗄️ **Database Console**: http://localhost:8080/h2-console
+
+<br>
+
+## 🔑 Demo Accounts
+
+| Role | Username | Password | Access Level |
+|:---:|:---:|:---:|:---:|
+| 👑 **Admin** | `admin` | `admin123` | Full system access |
+| 👤 **User** | `johndoe` | `password123` | Customer features |
+| 👤 **User** | `janesmith` | `password123` | Customer features |
+
+<br>
+
+## 📸 Application Screenshots
+
 <details>
-<summary>🗄️ Click to view Entity Relationship Diagram</summary>
-┌─────────────┐    ┌──────────────┐    ┌─────────────┐
-│    User     │    │   Category   │    │    Book     │
-├─────────────┤    ├──────────────┤    ├─────────────┤
-│ id (PK)     │    │ id (PK)      │    │ id (PK)     │
-│ username    │    │ name         │    │ title       │
-│ email       │    │ description  │    │ author      │
-│ password    │    │ active       │    │ isbn        │
-│ firstName   │    │ created_at   │    │ price       │
-│ lastName    │    │ updated_at   │    │ stock       │
-│ role        │    └──────────────┘    │ category_id │
-│ enabled     │           │             │ created_at  │
-│ created_at  │           │             │ updated_at  │
-│ updated_at  │           │             └─────────────┘
-└─────────────┘           └─────────────────────┘
-       │                                       │
-       │ 1:N                               N:1 │
-       ▼                                       ▼
-┌─────────────┐                    ┌─────────────┐
-│   Order     │                    │    Cart     │
-├─────────────┤                    ├─────────────┤
-│ id (PK)     │                    │ id (PK)     │
-│ user_id     │                    │ user_id     │
-│ order_num   │                    │ total_amt   │
-│ total_amt   │                    │ total_items │
-│ status      │                    │ created_at  │
-│ created_at  │                    │ updated_at  │
-└─────────────┘                    └─────────────┘
+<summary>🖼️ <strong>Click to view screenshots</strong></summary>
+
+<br>
+
+### 🏠 Homepage
+> *Modern landing page with featured books and intuitive navigation*
+
+### 📚 Book Catalog  
+> *Responsive grid layout with advanced search and filtering*
+
+### 📖 Book Details
+> *Comprehensive book information with purchase options*
+
+### 🔐 User Authentication
+> *Secure login/register with real-time validation*
+
+### 👨‍💼 Admin Dashboard
+> *Complete management interface for books and users*
+
 </details>
 
-🔗 API Documentation
-🔐 Authentication Endpoints
-httpPOST /api/auth/register    # User registration
-POST /api/auth/login       # User login
-POST /api/auth/logout      # User logout
-📚 Book Management
-httpGET    /api/books                    # Get all books (paginated)
-GET    /api/books/{id}               # Get book by ID
-GET    /api/books/search             # Search books
-GET    /api/books/category/{id}      # Get books by category
-POST   /api/books                    # Create book (Admin only)
-PUT    /api/books/{id}               # Update book (Admin only)
-DELETE /api/books/{id}               # Delete book (Admin only)
-🏷️ Category Management
-httpGET    /api/categories               # Get all categories
-GET    /api/categories/{id}          # Get category by ID
-POST   /api/categories               # Create category (Admin only)
-PUT    /api/categories/{id}          # Update category (Admin only)
-DELETE /api/categories/{id}          # Delete category (Admin only)
-👥 User Management
-httpGET    /api/users                    # Get all users (Admin only)
-GET    /api/users/profile            # Get current user profile
-PUT    /api/users/profile            # Update user profile
-GET    /api/users/check-username     # Check username availability
-GET    /api/users/check-email        # Check email availability
+<br>
 
-🧪 Testing
-Run Tests
-bash# Run all tests
+## 📁 Project Structure
+
+```
+bookhub-online-bookstore/
+├── 📂 src/main/java/com/bookhub/
+│   ├── 📂 config/              # 🔧 Configuration classes
+│   ├── 📂 controller/          # 🎮 REST & Web controllers  
+│   ├── 📂 service/             # ⚙️ Business logic layer
+│   ├── 📂 repository/          # 💾 Data access layer
+│   ├── 📂 entity/              # 📋 JPA entities
+│   └── 📄 BookstoreApplication.java
+├── 📂 src/main/resources/
+│   ├── 📂 templates/           # 🎨 Thymeleaf templates
+│   ├── 📂 static/              # 🌐 CSS, JS, images
+│   └── 📄 application.yml      # ⚙️ App configuration
+├── 📂 src/test/               # 🧪 Tests
+├── 📄 pom.xml                 # 📦 Maven dependencies
+└── 📄 README.md
+```
+
+<br>
+
+## 🗄️ Database Design
+
+<details>
+<summary>📊 <strong>Entity Relationship Diagram</strong></summary>
+
+<br>
+
+```
+👤 User (1) ──────── (N) 📋 Order (1) ──────── (N) 📦 OrderItem (N) ──────── (1) 📚 Book
+   │                                                                               │
+   │                                                                               │
+   │ (1)                                                                      (N)  │
+   │                                                                               │
+   🛒 Cart (1) ──────── (N) 🛍️ CartItem (N) ──────────────────────────────────────┘
+                                                                                   │
+                                                                              (N)  │
+                                                                                   │
+                                                           🏷️ Category (1) ────────┘
+```
+
+**Key Entities:**
+- 👤 **User**: Authentication, profile management
+- 📚 **Book**: Product catalog with details
+- 🏷️ **Category**: Book organization  
+- 🛒 **Cart**: Shopping cart functionality
+- 📋 **Order**: Purchase transactions
+
+</details>
+
+<br>
+
+## 🔗 API Documentation
+
+<details>
+<summary>🚀 <strong>Complete API Reference</strong></summary>
+
+<br>
+
+### 🔐 Authentication
+```http
+POST /api/auth/register         # User registration
+POST /api/auth/login           # User authentication  
+POST /api/auth/logout          # User logout
+```
+
+### 📚 Books Management
+```http
+GET    /api/books                    # 📖 Get all books (paginated)
+GET    /api/books/{id}               # 📖 Get specific book
+GET    /api/books/search?keyword={}  # 🔍 Search books
+GET    /api/books/category/{id}      # 🏷️ Books by category
+POST   /api/books                    # ➕ Create book (Admin)
+PUT    /api/books/{id}               # ✏️ Update book (Admin)
+DELETE /api/books/{id}               # ❌ Delete book (Admin)
+```
+
+### 🏷️ Categories
+```http
+GET    /api/categories               # 📂 Get all categories
+GET    /api/categories/{id}          # 📂 Get specific category
+POST   /api/categories               # ➕ Create category (Admin)
+PUT    /api/categories/{id}          # ✏️ Update category (Admin)
+DELETE /api/categories/{id}          # ❌ Delete category (Admin)
+```
+
+### 👥 Users
+```http
+GET    /api/users                    # 👥 Get all users (Admin)
+GET    /api/users/profile            # 👤 Current user profile
+PUT    /api/users/profile            # ✏️ Update profile
+GET    /api/users/check-username     # ✅ Username availability
+GET    /api/users/check-email        # ✅ Email availability
+```
+
+</details>
+
+<br>
+
+## 🎯 Technical Highlights
+
+<table>
+<tr>
+<td width="50%">
+
+### 🏗️ **Architecture & Design**
+- ✅ **Layered Architecture** - Clean separation of concerns
+- ✅ **Dependency Injection** - Spring IoC container
+- ✅ **Repository Pattern** - Data access abstraction
+- ✅ **MVC Pattern** - Organized web layer
+
+</td>
+<td width="50%">
+
+### 🔐 **Security & Validation**
+- ✅ **BCrypt Password Hashing** - Secure authentication
+- ✅ **Role-based Access Control** - User permissions
+- ✅ **CSRF Protection** - Security best practices  
+- ✅ **Input Validation** - Server & client-side
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+### ⚡ **Performance & Quality**
+- ✅ **Pagination** - Efficient data loading
+- ✅ **Lazy Loading** - Optimized JPA relationships
+- ✅ **Query Optimization** - Custom JPQL queries
+- ✅ **Error Handling** - Comprehensive exception management
+
+</td>
+<td width="50%">
+
+### 🛠️ **Development Practices**
+- ✅ **Clean Code** - Readable, maintainable codebase
+- ✅ **SOLID Principles** - Well-structured design
+- ✅ **RESTful API** - Standard web service design
+- ✅ **Responsive Design** - Mobile-friendly interface
+
+</td>
+</tr>
+</table>
+
+<br>
+
+## 🚀 Future Roadmap
+
+<details>
+<summary>📋 <strong>Planned Enhancements</strong></summary>
+
+<br>
+
+### 🛒 **E-commerce Features**
+- [ ] **Shopping Cart** - Persistent cart functionality
+- [ ] **Order Management** - Complete purchase workflow  
+- [ ] **Payment Integration** - Stripe/PayPal integration
+- [ ] **Email Notifications** - Order confirmations
+
+### 🎯 **Advanced Features**  
+- [ ] **JWT Authentication** - Stateless token-based auth
+- [ ] **Redis Caching** - Performance optimization
+- [ ] **Search Enhancement** - Elasticsearch integration
+- [ ] **Real-time Updates** - WebSocket notifications
+
+### ☁️ **DevOps & Deployment**
+- [ ] **Docker Containerization** - Deployment ready
+- [ ] **CI/CD Pipeline** - Automated testing & deployment
+- [ ] **Cloud Deployment** - AWS/Azure hosting
+- [ ] **Monitoring** - Application performance tracking
+
+</details>
+
+<br>
+
+## 🧪 Testing
+
+```bash
+# Run all tests
 mvn test
 
-# Run with coverage
+# Run with coverage report
 mvn test jacoco:report
 
 # Run specific test class
 mvn test -Dtest=BookServiceTest
-Test Coverage
+```
 
-✅ Unit Tests: Service layer business logic
-✅ Integration Tests: Repository layer with database
-✅ API Tests: Controller endpoints with MockMvc
-🔄 E2E Tests: Complete user workflows (planned)
+**Test Coverage:**
+- ✅ Unit Tests - Service layer logic
+- ✅ Integration Tests - Repository with database  
+- ✅ API Tests - Controller endpoints
+- 🔄 E2E Tests *(planned)*
 
+<br>
 
-📸 Screenshots
-<details>
-<summary>🖼️ Click to view application screenshots</summary>
-🏠 Homepage
-Professional landing page with featured books and categories
-📚 Book Catalog
-Responsive book grid with search and filtering capabilities
-📖 Book Details
-Comprehensive book information with related recommendations
-🔐 Authentication
-Secure login and registration with real-time validation
-👨‍💼 Admin Dashboard
-Complete administration interface for managing books and users
-</details>
+## 🤝 Contributing
 
-🎯 Key Technical Achievements
-🏗️ Architecture & Design Patterns
-
-✅ Layered Architecture: Clear separation between presentation, business, and data layers
-✅ Dependency Injection: Loosely coupled components using Spring's IoC container
-✅ Repository Pattern: Abstracted data access with Spring Data JPA
-✅ MVC Pattern: Clean separation of concerns in web layer
-
-🔐 Security Implementation
-
-✅ Password Encryption: BCrypt hashing for secure password storage
-✅ Role-based Access Control: Granular permissions for different user types
-✅ CSRF Protection: Built-in protection against cross-site request forgery
-✅ Input Validation: Comprehensive server-side and client-side validation
-
-⚡ Performance Optimizations
-
-✅ Pagination: Efficient loading of large datasets
-✅ Lazy Loading: Optimized JPA relationships to prevent N+1 problems
-✅ Database Indexing: Strategic indexes on frequently queried columns
-✅ Query Optimization: Custom JPQL queries for complex operations
-
-🛠️ Code Quality
-
-✅ Clean Code: Meaningful names, small functions, clear comments
-✅ SOLID Principles: Well-structured, maintainable codebase
-✅ Error Handling: Comprehensive exception handling throughout the application
-✅ Logging: Strategic logging for debugging and monitoring
-
-
-🚀 Future Enhancements
-🛒 E-commerce Features
-
- Shopping Cart functionality with persistent storage
- Order management with status tracking
- Payment integration (Stripe/PayPal)
- Email notifications for order updates
-
-🎯 Advanced Features
-
- JWT Token authentication for stateless sessions
- Redis caching for improved performance
- Elasticsearch integration for advanced search
- Real-time notifications with WebSocket
-
-☁️ DevOps & Deployment
-
- Docker containerization
- CI/CD pipeline with GitHub Actions
- AWS/Azure deployment
- Monitoring and logging with ELK stack
-
-📊 Analytics & Reporting
-
- Sales dashboard with charts
- User behavior analytics
- Inventory management reports
- Recommendation engine based on user preferences
-
-
-🤝 Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
-Development Setup
 
-Fork the repository
-Create your feature branch (git checkout -b feature/AmazingFeature)
-Commit your changes (git commit -m 'Add some AmazingFeature')
-Push to the branch (git push origin feature/AmazingFeature)
-Open a Pull Request
+### Development Workflow
+1. **Fork** the repository
+2. **Create** your feature branch (`git checkout -b feature/AmazingFeature`)
+3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** to the branch (`git push origin feature/AmazingFeature`)
+5. **Open** a Pull Request
 
-Code Style
+<br>
 
-Follow Java naming conventions
-Write clear, descriptive commit messages
-Add tests for new features
-Update documentation as needed
-
-
-📞 Contact
-Developer: Your Name
-Email: your.email@example.com
-LinkedIn: linkedin.com/in/yourprofile
-Portfolio: yourportfolio.com
-🌟 Let's Connect!
-I'm actively seeking Java Backend Developer opportunities and would love to discuss this project and my technical journey. Feel free to reach out!
-
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-🙏 Acknowledgments
-
-Spring Boot Team for the excellent framework
-Bootstrap Team for the responsive CSS framework
-Font Awesome for the beautiful icons
-Stack Overflow Community for invaluable problem-solving insights
-GitHub for hosting this project
-
+## 📞 Contact
 
 <div align="center">
-⭐ Star this repository if you found it helpful!
-Made with ❤️ and lots of ☕
-⬆ Back to Top
+
+### 👨‍💻 **Developer Information**
+
+**Name**: Your Name  
+**Email**: [your.email@example.com](mailto:your.email@example.com)  
+**LinkedIn**: [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)  
+**Portfolio**: [yourportfolio.com](https://yourportfolio.com)
+
+---
+
+### 🌟 **Open to Opportunities**
+Currently seeking **Java Backend Developer** positions.  
+Let's discuss how this project demonstrates my technical capabilities!
+
+</div>
+
+<br>
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+<br>
+
+## 🙏 Acknowledgments
+
+- 🍃 **Spring Boot Team** - For the excellent framework
+- 🎨 **Bootstrap Team** - For responsive design components
+- 💫 **Font Awesome** - For beautiful icons
+- 🤝 **Open Source Community** - For continuous learning
+
+<br>
+
+---
+
+<div align="center">
+
+### ⭐ **Star this repository if you found it helpful!**
+
+<br>
+
+Made with ❤️ and lots of ☕ by [Your Name](https://github.com/your-username)
+
+<br>
+
+**[⬆ Back to Top](#-bookhub-online-bookstore)**
+
 </div>
