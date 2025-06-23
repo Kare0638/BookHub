@@ -234,31 +234,31 @@ Complete administration interface for managing books and users
 🚀 Future Enhancements
 🛒 E-commerce Features
 
-Shopping Cart functionality with persistent storage
-Order management with status tracking
-Payment integration (Stripe/PayPal)
-Email notifications for order updates
+ Shopping Cart functionality with persistent storage
+ Order management with status tracking
+ Payment integration (Stripe/PayPal)
+ Email notifications for order updates
 
 🎯 Advanced Features
 
-JWT Token authentication for stateless sessions
-Redis caching for improved performance
-Elasticsearch integration for advanced search
-Real-time notifications with WebSocket
+ JWT Token authentication for stateless sessions
+ Redis caching for improved performance
+ Elasticsearch integration for advanced search
+ Real-time notifications with WebSocket
 
 ☁️ DevOps & Deployment
 
-Docker containerization
-CI/CD pipeline with GitHub Actions
-AWS/Azure deployment
-Monitoring and logging with ELK stack
+ Docker containerization
+ CI/CD pipeline with GitHub Actions
+ AWS/Azure deployment
+ Monitoring and logging with ELK stack
 
 📊 Analytics & Reporting
 
-Sales dashboard with charts
-User behavior analytics
-Inventory management reports
-Recommendation engine based on user preferences
+ Sales dashboard with charts
+ User behavior analytics
+ Inventory management reports
+ Recommendation engine based on user preferences
 
 
 🤝 Contributing
