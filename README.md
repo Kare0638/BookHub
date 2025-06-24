@@ -397,10 +397,9 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ### 👨‍💻 **Developer Information**
 
-**Name**: Your Name  
-**Email**: [your.email@example.com](mailto:your.email@example.com)  
-**LinkedIn**: [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)  
-**Portfolio**: [yourportfolio.com](https://yourportfolio.com)
+**Name**: Pai Liu  
+**Email**: [pliu2024@outlook.com](mailto:pliu2024@outlook.com)  
+**LinkedIn**: [www.linkedin.com/in/pailiu2025](www.linkedin.com/in/pailiu2025)  
 
 ---
 
