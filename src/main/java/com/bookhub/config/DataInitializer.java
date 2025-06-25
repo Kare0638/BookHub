@@ -40,20 +40,16 @@ public class DataInitializer implements CommandLineRunner {
 
         System.out.println("Initializing test data...");
 
-        // 1. 创建用户
         createUsers();
 
-        // 2. 创建分类
         createCategories();
 
-        // 3. 创建图书
         createBooks();
 
         System.out.println("Test data initialization completed!");
     }
 
     private void createUsers() {
-        // 创建管理员用户
         User admin = new User();
         admin.setUsername("admin");
         admin.setEmail("admin@bookhub.com");
@@ -64,7 +60,6 @@ public class DataInitializer implements CommandLineRunner {
         admin.setEnabled(true);
         userRepository.save(admin);
 
-        // 创建普通用户
         User user1 = new User();
         user1.setUsername("johndoe");
         user1.setEmail("john.doe@example.com");
@@ -113,7 +108,7 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private void createBooks() {
-        // 获取分类
+
         Category fiction = categoryRepository.findByName("Fiction").orElse(null);
         Category technology = categoryRepository.findByName("Technology").orElse(null);
         Category business = categoryRepository.findByName("Business").orElse(null);
