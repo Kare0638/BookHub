@@ -434,8 +434,6 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 <br>
 
-Made with ❤️ and lots of ☕ by [Your Name](https://github.com/your-username)
-
 <br>
 
 **[⬆ Back to Top](#-bookhub-online-bookstore)**
