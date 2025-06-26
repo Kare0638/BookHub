@@ -16,7 +16,7 @@
 
 <br>
 
-**[🌟 Live Demo](http://your-deployed-url.com)** • **[📚 API Docs](#-api-documentation)** • **[🚀 Quick Start](#-quick-start)** • **[💬 Contact](#-contact)**
+**[🌟 Live Demo](https://bookhub-production.up.railway.app/)** • **[📚 API Docs](#-api-documentation)** • **[🚀 Quick Start](#-quick-start)** • **[💬 Contact](#-contact)**
 
 <br>
 
