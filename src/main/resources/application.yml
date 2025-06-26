@@ -38,3 +38,4 @@ logging:
   level:
     com.bookhub: DEBUG
     org.springframework.security: DEBUG
+
