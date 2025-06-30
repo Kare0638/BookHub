@@ -284,17 +284,25 @@
 
         // Load cart data
         async loadCart() {
+            console.log('Loading cart for user:', this.userId); // Debug log
             try {
                 const response = await fetch(`/api/cart/user/${this.userId}`);
+                console.log('API response status:', response.status); // Debug log
+
                 if (response.ok) {
                     this.cart = await response.json();
+                    console.log('Cart data loaded:', this.cart); // Debug log
                     this.renderCart();
                 } else {
+                    console.error('API response not ok:', response.status, response.statusText);
                     throw new Error('Failed to load cart');
                 }
             } catch (error) {
                 console.error('Error loading cart:', error);
                 this.showAlert('Failed to load cart. Please refresh the page.', 'danger');
+                // Show empty cart state instead of staying in loading
+                document.getElementById('loadingState').classList.add('d-none');
+                document.getElementById('emptyCartState').classList.remove('d-none');
             } finally {
                 document.getElementById('loadingState').classList.add('d-none');
             }
@@ -302,10 +310,19 @@
 
         // Render cart interface
         renderCart() {
+            console.log('Rendering cart:', this.cart); // Debug log
             const cartContent = document.getElementById('cartContent');
             const emptyCartState = document.getElementById('emptyCartState');
 
-            if (!this.cart || !this.cart.cartItems || this.cart.cartItems.length === 0) {
+            // Check if cart is empty (no items or cartItems array is empty)
+            const isEmpty = !this.cart ||
+                           !this.cart.cartItems ||
+                           this.cart.cartItems.length === 0 ||
+                           this.cart.empty === true;
+
+            console.log('Cart is empty:', isEmpty); // Debug log
+
+            if (isEmpty) {
                 cartContent.classList.add('d-none');
                 emptyCartState.classList.remove('d-none');
                 this.updateCartBadge(0);
@@ -317,7 +334,7 @@
 
             this.renderCartItems();
             this.updateSummary();
-            this.updateCartBadge(this.cart.totalItems);
+            this.updateCartBadge(this.cart.totalItems || 0);
         }
 
         // Render cart items list
