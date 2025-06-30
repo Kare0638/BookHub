@@ -1,0 +1,348 @@
+<!-- 购物车调试页面 - 修复语法错误 -->
+<!-- src/main/resources/templates/cart-debug.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart Debug - BookHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-book"></i> BookHub
+        </a>
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/cart">
+                    <i class="fas fa-shopping-cart"></i> Cart
+                    <span class="badge bg-danger" id="cartCountBadge" style="display: none;">0</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Page Header -->
+<div class="bg-primary text-white py-4">
+    <div class="container">
+        <h1 class="mb-0">
+            <i class="fas fa-shopping-cart"></i> Shopping Cart (Debug Mode)
+        </h1>
+    </div>
+</div>
+
+<div class="container py-4">
+    <!-- Debug Controls -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Debug Controls</h5>
+                </div>
+                <div class="card-body">
+                    <button class="btn btn-primary me-2" onclick="loadCartData()">Load Cart</button>
+                    <button class="btn btn-success me-2" onclick="addTestItem()">Add Test Item</button>
+                    <button class="btn btn-warning me-2" onclick="clearCartData()">Clear Cart</button>
+                    <button class="btn btn-info me-2" onclick="showDebugInfo()">Show Debug Info</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Messages -->
+    <div id="alertContainer"></div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="text-center py-4">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-3">Loading your cart...</p>
+    </div>
+
+    <!-- Cart Content -->
+    <div id="cartContent" class="d-none">
+        <div class="row">
+            <!-- Cart Items -->
+            <div class="col-lg-8">
+                <h3 class="mb-4">Your Items</h3>
+                <div id="cartItemsList">
+                    <!-- Cart items will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Order Summary</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal:</span>
+                            <span id="subtotalAmount">$0.00</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Total Items:</span>
+                            <span id="totalItemsCount">0</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-3">
+                            <strong>Total:</strong>
+                            <strong id="totalAmount">$0.00</strong>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-success" onclick="checkout()">
+                                <i class="fas fa-credit-card"></i> Proceed to Checkout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Empty Cart State -->
+    <div id="emptyCartState" class="text-center py-5 d-none">
+        <i class="fas fa-shopping-cart fa-5x text-muted mb-4"></i>
+        <h3>Your cart is empty</h3>
+        <p class="lead">No books in your cart yet.</p>
+        <a href="/books" class="btn btn-primary btn-lg">
+            <i class="fas fa-book"></i> Start Shopping
+        </a>
+    </div>
+
+    <!-- Debug Info -->
+    <div id="debugInfo" class="mt-4" style="display: none;">
+        <div class="card">
+            <div class="card-header">
+                <h5>Debug Information</h5>
+            </div>
+            <div class="card-body">
+                <pre id="debugContent"></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Global variables
+    const USER_ID = 2; // Test user ID
+    let currentCart = null;
+
+    // Show alert message
+    function showAlert(message, type) {
+        const alertContainer = document.getElementById('alertContainer');
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+        alertDiv.innerHTML = `
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle'}"></i>
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+
+        alertContainer.appendChild(alertDiv);
+
+        // Auto-remove after 5 seconds
+        setTimeout(function() {
+            if (alertDiv.parentNode) {
+                alertDiv.remove();
+            }
+        }, 5000);
+    }
+
+    // Load cart data
+    async function loadCartData() {
+        console.log('Loading cart for user:', USER_ID);
+
+        const loadingState = document.getElementById('loadingState');
+        const cartContent = document.getElementById('cartContent');
+        const emptyCartState = document.getElementById('emptyCartState');
+
+        loadingState.classList.remove('d-none');
+        cartContent.classList.add('d-none');
+        emptyCartState.classList.add('d-none');
+
+        try {
+            const response = await fetch(`/api/cart/user/${USER_ID}`);
+            console.log('API response status:', response.status);
+
+            if (response.ok) {
+                currentCart = await response.json();
+                console.log('Cart data loaded:', currentCart);
+                renderCart();
+            } else {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error('Error loading cart:', error);
+            showAlert('Failed to load cart: ' + error.message, 'danger');
+            emptyCartState.classList.remove('d-none');
+        } finally {
+            loadingState.classList.add('d-none');
+        }
+    }
+
+    // Render cart
+    function renderCart() {
+        const cartContent = document.getElementById('cartContent');
+        const emptyCartState = document.getElementById('emptyCartState');
+
+        if (!currentCart || !currentCart.cartItems || currentCart.cartItems.length === 0) {
+            cartContent.classList.add('d-none');
+            emptyCartState.classList.remove('d-none');
+            updateCartBadge(0);
+            return;
+        }
+
+        emptyCartState.classList.add('d-none');
+        cartContent.classList.remove('d-none');
+
+        renderCartItems();
+        updateSummary();
+        updateCartBadge(currentCart.totalItems || 0);
+    }
+
+    // Render cart items
+    function renderCartItems() {
+        const container = document.getElementById('cartItemsList');
+        container.innerHTML = '';
+
+        if (!currentCart.cartItems || currentCart.cartItems.length === 0) {
+            container.innerHTML = '<p class="text-muted">No items in cart</p>';
+            return;
+        }
+
+        currentCart.cartItems.forEach(function(item) {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'card mb-3';
+            itemDiv.innerHTML = `
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h6>${item.book.title}</h6>
+                            <small class="text-muted">by ${item.book.author}</small>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <span class="fw-bold text-primary">$${item.unitPrice}</span>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <span>Qty: ${item.quantity}</span>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <span class="fw-bold">$${item.subtotal}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(itemDiv);
+        });
+    }
+
+    // Update summary
+    function updateSummary() {
+        if (!currentCart) return;
+
+        const subtotal = currentCart.totalAmount || 0;
+
+        document.getElementById('totalItemsCount').textContent = currentCart.totalItems || 0;
+        document.getElementById('subtotalAmount').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('totalAmount').textContent = `$${subtotal.toFixed(2)}`;
+    }
+
+    // Update cart badge
+    function updateCartBadge(count) {
+        const badge = document.getElementById('cartCountBadge');
+        if (badge) {
+            badge.textContent = count || 0;
+            badge.style.display = count > 0 ? 'inline' : 'none';
+        }
+    }
+
+    // Add test item
+    async function addTestItem() {
+        try {
+            const response = await fetch('/api/cart/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId: USER_ID,
+                    bookId: 1,
+                    quantity: 1
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                showAlert('Test item added successfully!', 'success');
+                loadCartData(); // Reload cart
+            } else {
+                showAlert('Failed to add item: ' + data.error, 'danger');
+            }
+        } catch (error) {
+            console.error('Error adding test item:', error);
+            showAlert('Error adding item: ' + error.message, 'danger');
+        }
+    }
+
+    // Clear cart
+    async function clearCartData() {
+        if (!confirm('Are you sure you want to clear your cart?')) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/cart/clear/${USER_ID}`, {
+                method: 'DELETE'
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                showAlert('Cart cleared successfully!', 'success');
+                loadCartData(); // Reload cart
+            } else {
+                showAlert('Failed to clear cart: ' + data.error, 'danger');
+            }
+        } catch (error) {
+            console.error('Error clearing cart:', error);
+            showAlert('Error clearing cart: ' + error.message, 'danger');
+        }
+    }
+
+    // Show debug info
+    function showDebugInfo() {
+        const debugInfo = document.getElementById('debugInfo');
+        const debugContent = document.getElementById('debugContent');
+
+        debugContent.textContent = JSON.stringify(currentCart, null, 2);
+        debugInfo.style.display = debugInfo.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Checkout function
+    function checkout() {
+        if (!currentCart || !currentCart.cartItems || currentCart.cartItems.length === 0) {
+            showAlert('Your cart is empty!', 'warning');
+            return;
+        }
+
+        showAlert('Checkout feature coming soon!', 'info');
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Page loaded, initializing cart...');
+        loadCartData();
+    });
+</script>
+</body>
+</html>

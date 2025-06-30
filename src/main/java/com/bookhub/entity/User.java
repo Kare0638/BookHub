@@ -1,5 +1,4 @@
-
-// ===== 1. User Entity =====
+// ===== Fixed User Entity - Resolving JSON Serialization Issues =====
 // src/main/java/com/bookhub/entity/User.java
 package com.bookhub.entity;
 
@@ -10,6 +9,8 @@ import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -37,6 +38,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     @NotBlank(message = "Password cannot be empty")
     @Size(min = 6, message = "Password must be at least 6 characters")
+    @JsonIgnore  // Never serialize password
     private String password;
 
     @Column(name = "first_name")
@@ -66,10 +68,12 @@ public class User implements UserDetails {
 
     // One-to-Many: User can have multiple orders
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore  // Ignore orders in JSON serialization to prevent circular reference
     private Set<Order> orders;
 
     // One-to-One: User shopping cart
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore  // Ignore cart in JSON serialization to prevent circular reference
     private Cart cart;
 
     // Constructors
@@ -99,21 +103,25 @@ public class User implements UserDetails {
 
     // Spring Security UserDetails implementation
     @Override
+    @JsonIgnore  // Don't serialize authorities
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
@@ -128,6 +136,7 @@ public class User implements UserDetails {
         return (firstName != null ? firstName : "") + " " + (lastName != null ? lastName : "");
     }
 
+    @JsonIgnore
     public boolean isAdmin() {
         return role == Role.ADMIN;
     }

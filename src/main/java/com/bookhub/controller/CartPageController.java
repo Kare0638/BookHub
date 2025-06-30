@@ -34,4 +34,9 @@ public class CartPageController {
         // TODO: Validate cart contents
         return "checkout"; // Will be implemented later
     }
+
+    @GetMapping("/cart-debug")
+    public String cartDebugPage() {
+        return "cart-debug";
+    }
 }

@@ -1,8 +1,9 @@
-// ===== 4. Cart Entity =====
+// ===== Fixed Cart Entity - Resolving JSON Serialization Issues =====
 // src/main/java/com/bookhub/entity/Cart.java
 package com.bookhub.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -17,7 +18,7 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)  // Changed to EAGER for better JSON serialization
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
@@ -34,7 +35,8 @@ public class Cart {
     private LocalDateTime updatedAt;
 
     // One-to-Many: One cart can have multiple cart items
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference  // Manage the forward reference to CartItems
     private Set<CartItem> cartItems = new HashSet<>();
 
     // Constructors

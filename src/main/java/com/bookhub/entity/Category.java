@@ -1,10 +1,11 @@
-// ===== 3. Category Entity =====
+// ===== Fixed Category Entity - Resolving JSON Serialization Issues =====
 // src/main/java/com/bookhub/entity/Category.java
 package com.bookhub.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -36,6 +37,7 @@ public class Category {
 
     // One-to-Many: One category can have multiple books
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore  // Ignore books to prevent circular reference
     private Set<Book> books;
 
     // Constructors

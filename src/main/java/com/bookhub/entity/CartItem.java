@@ -1,10 +1,11 @@
-// ===== 5. CartItem Entity =====
+// ===== Fixed CartItem Entity - Resolving JSON Serialization Issues =====
 // src/main/java/com/bookhub/entity/CartItem.java
 package com.bookhub.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,9 +20,10 @@ public class CartItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id", nullable = false)
+    @JsonBackReference  // Prevent circular reference back to Cart
     private Cart cart;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)  // Eager fetch for book details
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 

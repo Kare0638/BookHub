@@ -1,9 +1,10 @@
-// ===== 4. Book Entity =====
+// ===== Fixed Book Entity - Resolving JSON Serialization Issues =====
 // src/main/java/com/bookhub/entity/Book.java
 package com.bookhub.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -77,16 +78,18 @@ public class Book {
     private LocalDateTime updatedAt;
 
     // Many-to-One: Multiple books belong to one category
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     // One-to-Many: One book can be in multiple order items
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore  // Ignore order items to prevent circular reference
     private Set<OrderItem> orderItems;
 
     // One-to-Many: One book can be in multiple cart items
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore  // Ignore cart items to prevent circular reference
     private Set<CartItem> cartItems;
 
     // Constructors
