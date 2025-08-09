@@ -1,26 +1,33 @@
 # ===================================================================
 # Sensitive Information & Credentials
-# NEVER commit secrets, passwords, or environment-specific properties.
-# = a=================================================================
-# Ignore environment-specific application properties/YAML files
+# Avoid committing environment-specific sensitive files containing secrets like DB passwords
+# ===================================================================
+
+# Spring Boot application config (ignore all but allow templates)
 application-*.yml
 application-*.properties
-
-# But DO commit template/example files
 !application-template.yml
 !application-template.properties
 
-# Ignore local environment variable files
-.env
+# Local override config files (commonly contain secrets)
+*-local.yml
+*-local.properties
 
-# Ignore files containing credentials or secrets
+# Environment variables files (commonly hold secrets)
+.env
+.env.*
+
+# Common secret files by name pattern
 *secret*
 *credential*
 *.key
+*.pem
+*.jks
 
 # ===================================================================
 # Build & Dependency Cache
 # ===================================================================
+
 # Maven
 target/
 .mvn/wrapper/maven-wrapper.jar
@@ -34,12 +41,12 @@ dependency-reduced-pom.xml
 # Gradle
 .gradle/
 build/
-# Allow the gradle wrapper to be checked in
 !gradle/wrapper/gradle-wrapper.jar
 
 # ===================================================================
 # Compiled & Packaged Files
 # ===================================================================
+
 *.class
 *.jar
 *.war
@@ -51,49 +58,41 @@ build/
 # ===================================================================
 # IDE & Editor Configuration
 # ===================================================================
-# IntelliJ IDEA
+
+# IntelliJ IDEA configuration
 .idea/
 *.iml
 *.iws
 *.ipr
 
-# Eclipse / Spring Tool Suite (STS)
+# Eclipse/STC/NetBeans
 .settings/
 .classpath
 .project
-.apt_generated
+.apt_generated/
 .factorypath
-.springBeans
-.sts4-cache
+.springBeans/
+.sts4-cache/
+nbbuild/
+nbdist/
+.nb-gradle/
 
-# NetBeans
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-# VS Code
+# VS Code settings
 .vscode/
 
 # ===================================================================
 # Log & Temporary Files
 # ===================================================================
-# Log files
+
 *.log
-
-# Virtual machine crash logs
 hs_err_pid*
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+*.tmp
+*.temp
 
 # ===================================================================
 # OS-specific Files
 # ===================================================================
+
 .DS_Store
 .DS_Store?
 ._*
@@ -101,3 +100,27 @@ hs_err_pid*
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# ===================================================================
+# Others and suggestions
+# ===================================================================
+
+# Git hooks (optional - ignore if you put secrets here)
+.git/hooks/
+
+# Ignore build output folders not covered above
+out/
+
+# Ignore node_modules if you use node/npm in your project
+node_modules/
+
+# Ignore coverage, reports, and temp files for testing
+coverage/
+reports/
+tmp/
+
+# Ignore BookHub specific local data or caches (if any)
+bookhub-data/
+bookhub-cache/
+
+
